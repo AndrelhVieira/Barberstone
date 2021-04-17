@@ -21,7 +21,7 @@ import {
   TextAreaInput,
 } from "./styles";
 import {
-  notifyRegisterSuccess,
+  notifyRegisterUpdate,
   notifyErrorClient,
 } from "../../services/notifyData";
 import Check from "../../images/check.svg";
@@ -68,7 +68,7 @@ const FormProfileBarberShop = ({setRender}) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        notifyRegisterSuccess();
+        notifyRegisterUpdate();
       })
       .catch((e) => {
         notifyErrorClient(e.response);

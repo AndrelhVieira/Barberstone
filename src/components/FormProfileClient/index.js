@@ -13,7 +13,7 @@ import {
   FormUpdate,
   ButtonsDiv,
 } from "./styles";
-import { notifyError, notifyRegisterSuccess } from "../../services/notifyData";
+import { notifyError, notifyRegisterUpdate } from "../../services/notifyData";
 
 const FormProfileClient = ({ setRender }) => {
   const { isNew, setIsNew } = useUser();
@@ -47,7 +47,7 @@ const FormProfileClient = ({ setRender }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        notifyRegisterSuccess();
+        notifyRegisterUpdate();
       })
       .catch((e) => {
         notifyError(e.response);
