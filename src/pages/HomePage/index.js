@@ -16,6 +16,7 @@ import { pageTransition, pageVariants } from '../../services/pageTransition'
 const HomePage = () => {
   const init = pageVariants.in
   const out = pageVariants.out
+  const initial = pageVariants.initial
   const [goRegister, setGoRegister] = useState(false);
 
   const isRegister = useLocation().state;
@@ -25,24 +26,32 @@ const HomePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const scroll = ()=>{
+    setTimeout(() => {
+      scroller.scrollTo("cadastrar", { offset: 10 })
+    }, 400);
+  }
+
   return (
-    <motion.div
-      key="HomePage"
-      initial={out}
-      animate={init}
-      exit={out}
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-      {goRegister && scroller.scrollTo("cadastrar", { offset: 10 })}
+    <>
       <Menu menuLink={menuLinkHome} isRegister />
-      <Cover></Cover>
-      <About id="sobre" />
-      <ServicesProvided id="serviços" />
-      <HowItWorks id="#como-funciona" />
-      <RegisterSectionHomepage id="cadastrar" name="cadastrar" />
-      <Footer />
-    </motion.div>
+      <motion.div
+        key="HomePage"
+        initial={initial}
+        animate={init}
+        exit={out}
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        {goRegister && scroll()}
+        <Cover></Cover>
+        <About id="sobre" />
+        <ServicesProvided id="serviços" />
+        <HowItWorks id="#como-funciona" />
+        <RegisterSectionHomepage  />
+        <Footer id="cadastrar" name="cadastrar"/>
+      </motion.div>
+    </>
   );
 };
 

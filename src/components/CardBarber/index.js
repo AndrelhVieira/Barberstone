@@ -28,7 +28,14 @@ const CardBarber = ({ name, rating, id }) => {
 
   return (
     <>
-      <Card onClick={() => redirect(id)}>
+      <Card 
+        whileHover={{
+          scale:1.05, 
+          y:-1,
+          boxShadow:'0 0 2px #FFF, 0 0 5px #FFF, 0 0 10px #FFF, 0 0 12px #bb8c4b, 0 0 14px #bb8c4b, 0 0 16px #bb8c4b, 0 0 18px #bb8c4b, 0 0 20px #bb8c4b'
+        }}
+        onClick={() => redirect(id)}
+      >
         <img src={BarberIcon} alt="barber-icon" />
         <h4>{name}</h4>
         <ScissorsRate>

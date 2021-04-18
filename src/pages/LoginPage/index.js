@@ -21,16 +21,16 @@ import { pageTransition, pageVariants } from '../../services/pageTransition'
 const Login = () => {
   const init = pageVariants.in
   const out = pageVariants.out
+  const initial = pageVariants.initial
   return (
     <motion.div
       key="/entrar  "
-      initial={out}
+      initial={initial}
       animate={init}
       exit={out}
       variants={pageVariants}
       transition={pageTransition}
     >
-
       <GlobalContainer>
         <BackGroundImage image={Background} />
         <ContainerForm>

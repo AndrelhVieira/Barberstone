@@ -21,10 +21,11 @@ import { pageTransition, pageVariants } from '../../services/pageTransition'
 const ClientRegisterPage = () => {
   const init = pageVariants.in
   const out = pageVariants.out
+  const initial = pageVariants.initial
   return (
     <motion.div
       key="clientRegisterPage"
-      initial={out}
+      initial={initial}
       animate={init}
       exit={out}
       variants={pageVariants}

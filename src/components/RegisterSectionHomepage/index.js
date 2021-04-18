@@ -20,7 +20,10 @@ const RegisterSectionHomepage = () => {
             whileHover={{
               scale:1.05, 
               y:-5,
-              boxShadow:'0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 15px rgb(255, 255, 255), 0 0 20px rgb(187, 140, 75), 0 0 30px rgb(187, 140, 75), 0 0 40px rgb(187, 140, 75), 0 0 55px rgb(187, 140, 75), 0 0 75px rgb(187, 140, 75)'
+              boxShadow:'0 0 2px #FFF, 0 0 5px #FFF, 0 0 10px #FFF, 0 0 12px #bb8c4b, 0 0 14px #bb8c4b, 0 0 16px #bb8c4b, 0 0 18px #bb8c4b, 0 0 20px #bb8c4b'
+            }}
+            transition={{
+              duration: 0.1
             }}
             image={CustomerImage}
             onClick={() => handleClick("/cadastro-cliente")}

@@ -10,7 +10,7 @@ const Cover = () => {
         <img src={Logo} alt="logo" />
         <motion.div
           animate={{
-            y:[0,40,0]
+            y:[0,40,1]
           }}
           transition={{
             duration: 1.5,

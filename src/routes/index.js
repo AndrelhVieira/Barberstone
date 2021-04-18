@@ -16,7 +16,7 @@ const Routes = () => {
 
   const location = useLocation()
   return (
-    <div style={{overflowY:Hidden}}>
+    <div style={{overflowX:'Hidden'}}>
 
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname} >

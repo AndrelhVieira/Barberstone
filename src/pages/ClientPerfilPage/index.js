@@ -38,6 +38,7 @@ import LinkGoTo from "../../components/LinkGoTo";
 const ClientPerfilPage = () => {
   const init = pageVariants.in
   const out = pageVariants.out
+  const initial = pageVariants.initial
   const { schedule } = useSchedule();
   const { user, getUser, isNew } = useUser();
   const [render, setRender] = useState(false);
@@ -63,107 +64,109 @@ const ClientPerfilPage = () => {
   }, []);
 
   return (
-  <motion.div
-    key="clientPerfilPage"
-    initial={out}
-    animate={init}
-    exit={out}
-    variants={pageVariants}
-    transition={pageTransition}
-  >
-    <BodyPage>
-      {render && <ModalNewUser />}
-      {!isNew}
+    <>
       <Menu menuLink={menuLinkPerfilClient} isNew={isNew} />
-      {!isNew && (
-        <>
-          <BgPerfil id="perfil" />
-          <ImgPerfil src={perfil} />
-          <Nome>{user.name}</Nome>
-          <Estrelinha src={star} />
-          <TextoDescritivo>Vale fidelidade</TextoDescritivo>
-          <Descricao>
-            a cada dez serviços ganhe um corte de graça nas barbearias
-            participantes
-          </Descricao>
-          <Descricao isOther="true">Seus selos</Descricao>
-          {user && user.scissors > 0 ? (
-            <BoxFidelidade>
-              {isDesktop && user && user.scissors < 5 ? (
-                Array(user && user.scissors)
-                  .fill(0)
-                  .map((item, index) => <Tesoura key={index} src={scissors} />)
+      <motion.div
+        key="clientPerfilPage"
+        initial={initial}
+        animate={init}
+        exit={out}
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        <BodyPage>
+          {render && <ModalNewUser />}
+          {!isNew}
+          {!isNew && (
+            <>
+              <BgPerfil id="perfil" />
+              <ImgPerfil src={perfil} />
+              <Nome>{user.name}</Nome>
+              <Estrelinha src={star} />
+              <TextoDescritivo>Vale fidelidade</TextoDescritivo>
+              <Descricao>
+                a cada dez serviços ganhe um corte de graça nas barbearias
+                participantes
+              </Descricao>
+              <Descricao isOther="true">Seus selos</Descricao>
+              {user && user.scissors > 0 ? (
+                <BoxFidelidade>
+                  {isDesktop && user && user.scissors < 5 ? (
+                    Array(user && user.scissors)
+                      .fill(0)
+                      .map((item, index) => <Tesoura key={index} src={scissors} />)
+                  ) : (
+                    <>
+                      <ContFidelidade>{user && user.scissors}x</ContFidelidade>
+                      <Tesoura src={scissors} />
+                    </>
+                  )}
+                </BoxFidelidade>
               ) : (
-                <>
-                  <ContFidelidade>{user && user.scissors}x</ContFidelidade>
-                  <Tesoura src={scissors} />
-                </>
+                <TextoDescritivo erro>
+                  Você ainda não possui serviços concluídos
+                </TextoDescritivo>
               )}
-            </BoxFidelidade>
-          ) : (
-            <TextoDescritivo erro>
-              Você ainda não possui serviços concluídos
-            </TextoDescritivo>
+              <Estrelinha src={calendar} />
+              <TextoDescritivo>Seus agendamentos</TextoDescritivo>
+              {filteredSchedule.length > 0 ? (
+                <Container>
+                  <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlay
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className="carousel"
+                    containerClass="container"
+                    dotListClass=""
+                    draggable
+                    responsive={responsive}
+                    focusOnSelect={false}
+                    infinite
+                    itemClass=""
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                  >
+                    {filteredSchedule.map(
+                      ({ barberId, dateTime, price, id }, index) => (
+                        <CardAgendamentos
+                          key={index}
+                          price={price}
+                          barberId={barberId}
+                          dateTime={dateTime}
+                          id={id}
+                        />
+                      )
+                    )}
+                  </Carousel>
+                </Container>
+              ) : (
+                <TextoDescritivo erro>
+                  Você ainda não possui agendamentos
+                </TextoDescritivo>
+              )}
+            </>
           )}
-          <Estrelinha src={calendar} />
-          <TextoDescritivo>Seus agendamentos</TextoDescritivo>
-          {filteredSchedule.length > 0 ? (
-            <Container>
-              <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlay
-                autoPlaySpeed={3000}
-                centerMode={false}
-                className="carousel"
-                containerClass="container"
-                dotListClass=""
-                draggable
-                responsive={responsive}
-                focusOnSelect={false}
-                infinite
-                itemClass=""
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={false}
-                renderDotsOutside={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable
-              >
-                {filteredSchedule.map(
-                  ({ barberId, dateTime, price, id }, index) => (
-                    <CardAgendamentos
-                      key={index}
-                      price={price}
-                      barberId={barberId}
-                      dateTime={dateTime}
-                      id={id}
-                    />
-                  )
-                )}
-              </Carousel>
-            </Container>
+          <IconePequeno src={clock} />
+          {isNew ? (
+            <TextoComplete>
+              Complete seu cadastro aqui seu cadastro para poder avançar
+            </TextoComplete>
           ) : (
-            <TextoDescritivo erro>
-              Você ainda não possui agendamentos
-            </TextoDescritivo>
+            <TextoDescritivo>Atualizar Dados</TextoDescritivo>
           )}
-        </>
-      )}
-      <IconePequeno src={clock} />
-      {isNew ? (
-        <TextoComplete>
-          Complete seu cadastro aqui seu cadastro para poder avançar
-        </TextoComplete>
-      ) : (
-        <TextoDescritivo>Atualizar Dados</TextoDescritivo>
-      )}
-      <FormProfileClient setRender={setRender} />
-      <Footer />
-      <Notification />
-    </BodyPage>
-  </motion.div>
+          <FormProfileClient setRender={setRender} />
+          <Footer />
+          <Notification />
+        </BodyPage>
+      </motion.div>
+    </>
   );
 };
 

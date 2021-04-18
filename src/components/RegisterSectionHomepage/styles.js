@@ -9,20 +9,17 @@ export const Motion = styled(motion.button)`
   max-width: 275px;
   margin: 10px 0;
   border-radius: 20px;
-  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.75);
+  //box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.75);
   cursor: pointer;
-  transition-duration: 5s;
+  /* transition-duration: 5s;
   transition: box-shadow, transform, 0.2s ease-out;
   transition-property: box-shadow, transform, all;
   transition-duration: 0s, 0s, 0.2s;
   transition-timing-function: ease, ease, ease-out;
-  transition-delay: 0s, 0s, 0s;
+  transition-delay: 0s, 0s, 0s; */
   outline: none;
   border: none;
   display: flex;
-  :hover {
-    box-shadow:'0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #BB8C4B, 0 0 30px #BB8C4B, 0 0 40px #BB8C4B, 0 0 55px #BB8C4B, 0 0 75px #BB8C4B'
-  }
 
   span {
     display:inline-block;
@@ -40,10 +37,6 @@ export const Motion = styled(motion.button)`
         margin-left: 10px;
       }
 
-  }
-
-  &:hover {
-    transform: translateY(-6px);
   }
 
   @media screen and (min-width: 625px) {

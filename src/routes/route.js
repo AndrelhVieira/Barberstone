@@ -14,6 +14,7 @@ const Route = ({
 
   const isBarber = JSON.parse(localStorage.getItem("isBarber"));
 
+  
   return (
     <ReactDOMRoute
       {...rest}

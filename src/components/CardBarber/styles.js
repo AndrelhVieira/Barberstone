@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
 import background from "../../images/backgroundCard.jpg";
+import { motion } from 'framer-motion'
 
-export const Card = styled.div`
+export const Card = styled(motion.div)`
   padding: 20px;
   border-radius: 20px;
   background-image: url(${background});

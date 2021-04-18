@@ -34,6 +34,6 @@ export const CoverContainer = styled.div`
     z-index: 1;
     font-size: 3rem;
     position: absolute;
-    bottom: -100px;
+    bottom: -150px;
   }
 `;
