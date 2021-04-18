@@ -5,6 +5,7 @@ import * as yup from "yup";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from '../../providers/User'
 import {
   FormComponent,
   SpanError,
@@ -16,6 +17,7 @@ import {
 import { notifyErrorLogin } from "../../services/notifyData";
 
 const FormLogin = () => {
+  const { setIsNew } = useUser()
   const [error] = useState(false);
   const history = useHistory();
 
@@ -57,11 +59,14 @@ const FormLogin = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        if(response.data.phone === undefined) {
+          setIsNew(true)
+        }
         localStorage.setItem(
           "isBarber",
           JSON.stringify(response.data.isBarber) || false
         );
-        goToProfile(response.data.isBarber, userId);
+          goToProfile(response.data.isBarber, userId);
       });
   };
 
@@ -74,23 +79,25 @@ const FormLogin = () => {
   };
 
   return (
-    <FormComponent onSubmit={handleSubmit(onSubmit)}>
-      <DivInput>
-        <Label>Email</Label>
-        <Input name="email" ref={register} />
-        {!!errors && <SpanError>{errors.email?.message}</SpanError>}
-      </DivInput>
-      <DivInput>
-        <Label>Senha</Label>
-        <Input name="password" type="password" ref={register} />
-        {!!errors && <SpanError>{errors.password?.message}</SpanError>}
-      </DivInput>
-      <DivInput>
-        <ButtonForm type="submit">Entrar</ButtonForm>
-      </DivInput>
-      <DivInput></DivInput>
-      {error && <SpanError> Usuário ou senha incorretas! </SpanError>}
-    </FormComponent>
+    <>
+      <FormComponent onSubmit={handleSubmit(onSubmit)}>
+        <DivInput>
+          <Label>Email</Label>
+          <Input name="email" ref={register} />
+          {!!errors && <SpanError>{errors.email?.message}</SpanError>}
+        </DivInput>
+        <DivInput>
+          <Label>Senha</Label>
+          <Input name="password" type="password" ref={register} />
+          {!!errors && <SpanError>{errors.password?.message}</SpanError>}
+        </DivInput>
+        <DivInput>
+          <ButtonForm type="submit">Entrar</ButtonForm>
+        </DivInput>
+        <DivInput></DivInput>
+        {error && <SpanError> Usuário ou senha incorretas! </SpanError>}
+      </FormComponent>
+    </>
   );
 };
 

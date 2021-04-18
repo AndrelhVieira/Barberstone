@@ -7,12 +7,16 @@ import RegisterSectionHomepage from "../../components/RegisterSectionHomepage";
 import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 import { scroller } from "react-scroll";
-
+import { motion } from 'framer-motion'
 import { menuLinkHome } from "../../services/menuData";
 import { useState } from "react";
 import { useEffect } from "react";
+import { pageTransition, pageVariants } from '../../services/pageTransition'
 
 const HomePage = () => {
+  const init = pageVariants.in
+  const out = pageVariants.out
+  const initial = pageVariants.initial
   const [goRegister, setGoRegister] = useState(false);
 
   const isRegister = useLocation().state;
@@ -22,16 +26,31 @@ const HomePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const scroll = ()=>{
+    setTimeout(() => {
+      scroller.scrollTo("cadastrar", { offset: 10 })
+    }, 400);
+  }
+
   return (
     <>
-      {goRegister && scroller.scrollTo("cadastrar", { offset: 10 })}
       <Menu menuLink={menuLinkHome} isRegister />
-      <Cover></Cover>
-      <About id="sobre" />
-      <ServicesProvided id="serviços" />
-      <HowItWorks id="#como-funciona" />
-      <RegisterSectionHomepage id="cadastrar" name="cadastrar" />
-      <Footer />
+      <motion.div
+        key="HomePage"
+        initial={initial}
+        animate={init}
+        exit={out}
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        {goRegister && scroll()}
+        <Cover></Cover>
+        <About id="sobre" />
+        <ServicesProvided id="serviços" />
+        <HowItWorks id="#como-funciona" />
+        <RegisterSectionHomepage  />
+        <Footer id="cadastrar" name="cadastrar"/>
+      </motion.div>
     </>
   );
 };

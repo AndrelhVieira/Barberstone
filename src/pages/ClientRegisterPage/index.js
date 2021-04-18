@@ -15,10 +15,23 @@ import FormClientRegister from "../../components/FormClientRegister";
 import BackGroundImage from "../../components/BackGroundImage";
 import Background from "../../images/backgroundRegister.jpg";
 import Notification from "../../components/Notification";
+import { motion } from 'framer-motion'
+import { pageTransition, pageVariants } from '../../services/pageTransition'
 
 const ClientRegisterPage = () => {
+  const init = pageVariants.in
+  const out = pageVariants.out
+  const initial = pageVariants.initial
   return (
-    <>
+    <motion.div
+      key="clientRegisterPage"
+      initial={initial}
+      animate={init}
+      exit={out}
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+
       <GlobalContainer>
         <BackGroundImage image={Background} />
         <ContainerForm>
@@ -40,7 +53,7 @@ const ClientRegisterPage = () => {
         </ContainerRegister>
         <Notification />
       </GlobalContainer>
-    </>
+    </motion.div>
   );
 };
 

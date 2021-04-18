@@ -15,6 +15,14 @@ export const StyledMenu = styled.nav`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
   z-index: 1001;
 
+  span {
+    text-align:center;
+    margin: 14px 0 ;
+    &:hover {
+      text-shadow: '0 0 1px #FFF, 0 0 2px #FFF, 0 0 3px #FFF, 0 0 4px #bb8c4b, 0 0 5px #bb8c4b, 0 0 6px #bb8c4b, 0 0 7px #bb8c4b, 0 0 8px #bb8c4b';
+    }
+  }
+
   a {
     font-size: 2.5rem;
     text-transform: uppercase;
