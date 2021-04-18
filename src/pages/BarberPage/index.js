@@ -13,6 +13,7 @@ import {
   BoxLazer,
   Atracao,
   ImgLazerFalse,
+  BackImg,
 } from "./styles";
 import CardClient from "../../components/CardClient";
 import Footer from "../../components/Footer";
@@ -25,6 +26,7 @@ import { useLocation } from "react-router-dom";
 import TransitionsModal from "../../components/ModalNewAgend";
 import Notification from "../../components/Notification";
 import { motion } from 'framer-motion'
+import Forbiden from "../../images/forbiden.png";
 import Sinuca from "../../images/sinuca.jpg";
 import Playground from "../../images/playground.jpg";
 import Churrasqueira from "../../images/churrasqueira.jpg";
@@ -76,8 +78,7 @@ const BarberPage = () => {
     leisure[2].bool = ChurrasqueiraBool;
     leisure[3].bool = PlaygroundBool;
   });
-
-  console.log(barberUser.state.id);
+  
   return (
     <>
     <Menu menuLink={menuLinkPerfil} />
@@ -142,18 +143,22 @@ const BarberPage = () => {
             Em breve haverá clientes aqui! ;)
           </TextoDescritivo>
         )}
-          <BoxLazer>
-            {leisure.map((lazer, index) => (
-              <Atracao key={index}>
-                <TextoDescritivo>{lazer.text}</TextoDescritivo>
-                {lazer.bool ? (
-                  <ImgLazer src={lazer.image} />
-                ) : (
-                  <ImgLazerFalse src={lazer.image} />
-                )}
-              </Atracao>
-            ))}
-          </BoxLazer>
+        <BoxLazer>
+          {leisure.map((lazer, index) => (
+            <Atracao key={index}>
+              <TextoDescritivo>{lazer.text}</TextoDescritivo>
+              {lazer.bool ? (
+                <BackImg image={lazer.image} isGray={false}>
+                  <ImgLazer isGray={false} />
+                </BackImg>
+              ) : (
+                <BackImg image={lazer.image} isGray>
+                  <ImgLazerFalse src={Forbiden} isGray />
+                </BackImg>
+              )}
+            </Atracao>
+          ))}
+        </BoxLazer>
           <Footer />
           <Notification />
         </BodyPage>
