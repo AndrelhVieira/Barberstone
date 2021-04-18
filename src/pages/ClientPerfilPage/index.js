@@ -76,7 +76,6 @@ const ClientPerfilPage = () => {
       >
         <BodyPage>
           {render && <ModalNewUser />}
-          {!isNew}
           {!isNew && (
             <>
               <BgPerfil id="perfil" />

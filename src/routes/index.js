@@ -36,8 +36,8 @@ const Routes = () => {
             isprivate
             isbarber
           />
-          <Route path="/detalhes-barbearia" component={BarberPage} isprivate />
-          <Route path="/barbearias" component={Barbershop} isprivate />
+          <Route path="/detalhes-barbearia" component={BarberPage} isprivate isclient isbarber />
+          <Route path="/barbearias" component={Barbershop} isprivate isclient isbarber />
           <Route component={NotFound} />
         </Switch>
       </AnimatePresence>
