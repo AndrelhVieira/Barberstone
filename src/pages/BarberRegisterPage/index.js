@@ -21,37 +21,40 @@ import { motion } from 'framer-motion'
 const BarberRegisterPage = () => {
   const init = pageVariants.in
   const out = pageVariants.out
+  const initial = pageVariants.initial
   return (
-    <motion.div
-      key="barberRegisterPage"
-      initial={out}
-      animate={init}
-      exit={out}
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-      <GlobalContainer>
-        <BackGroundImage image={Background} />
-        <ContainerForm>
-          <ButtonWrap>
-            <ButtonBackToHome />
-          </ButtonWrap>
-          <H1Title>Cadastre-se</H1Title>
-          <FormBarberRegister />
-          <ElemP>
-            Ja possui uma conta? <LinkGoTo to={"/entrar"}>Entre Agora</LinkGoTo>
-          </ElemP>
-          <FooterForm />
-        </ContainerForm>
-        <ContainerRegister>
-          <H1Register>
-            Torne-se um membro e amplie sua rede de clientes
-          </H1Register>
-          <FooterPage />
-        </ContainerRegister>
-        <Notification />
-      </GlobalContainer>
-    </motion.div>
+    <>
+      <motion.div
+        key="barberRegisterPage"
+        initial={initial}
+        animate={init}
+        exit={out}
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        <GlobalContainer>
+          <BackGroundImage image={Background} />
+          <ContainerForm>
+            <ButtonWrap>
+              <ButtonBackToHome />
+            </ButtonWrap>
+            <H1Title>Cadastre-se</H1Title>
+            <FormBarberRegister />
+            <ElemP>
+              Ja possui uma conta? <LinkGoTo to={"/entrar"}>Entre Agora</LinkGoTo>
+            </ElemP>
+            <FooterForm />
+          </ContainerForm>
+          <ContainerRegister>
+            <H1Register>
+              Torne-se um membro e amplie sua rede de clientes
+            </H1Register>
+            <FooterPage />
+          </ContainerRegister>
+          <Notification />
+        </GlobalContainer>
+      </motion.div>
+    </>
   );
 };
 
