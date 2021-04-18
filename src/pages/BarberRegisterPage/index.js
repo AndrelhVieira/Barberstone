@@ -2,6 +2,7 @@ import GlobalContainer from "../../components/GlobalContainer";
 import FooterPage from "../../components/FooterPage";
 import FooterForm from "../../components/FooterForm";
 import ButtonBackToHome from "../../components/ButtonBackToHome";
+import { pageTransition, pageVariants } from '../../services/pageTransition'
 import {
   ButtonWrap,
   ElemP,
@@ -15,10 +16,20 @@ import FormBarberRegister from "../../components/FormBarberRegister";
 import BackGroundImage from "../../components/BackGroundImage";
 import Background from "../../images/backgroundRegister.jpg";
 import Notification from "../../components/Notification";
+import { motion } from 'framer-motion'
 
 const BarberRegisterPage = () => {
+  const init = pageVariants.in
+  const out = pageVariants.out
   return (
-    <>
+    <motion.div
+      key="barberRegisterPage"
+      initial={out}
+      animate={init}
+      exit={out}
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <GlobalContainer>
         <BackGroundImage image={Background} />
         <ContainerForm>
@@ -40,7 +51,7 @@ const BarberRegisterPage = () => {
         </ContainerRegister>
         <Notification />
       </GlobalContainer>
-    </>
+    </motion.div>
   );
 };
 

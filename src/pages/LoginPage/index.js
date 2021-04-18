@@ -15,10 +15,22 @@ import FooterPage from "../../components/FooterPage";
 import BackGroundImage from "../../components/BackGroundImage";
 import Background from "../../images/backgroundLogin.jpg";
 import Notification from "../../components/Notification";
+import { motion } from 'framer-motion'
+import { pageTransition, pageVariants } from '../../services/pageTransition'
 
 const Login = () => {
+  const init = pageVariants.in
+  const out = pageVariants.out
   return (
-    <>
+    <motion.div
+      key="/entrar  "
+      initial={out}
+      animate={init}
+      exit={out}
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+
       <GlobalContainer>
         <BackGroundImage image={Background} />
         <ContainerForm>
@@ -41,7 +53,7 @@ const Login = () => {
         </ContainerLogin>
         <Notification />
       </GlobalContainer>
-    </>
+    </motion.div>
   );
 };
 

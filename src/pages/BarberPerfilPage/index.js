@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import { menuLinkPerfilBarber } from "../../services/menuData";
 import "../../styles/global.css";
+import { pageTransition, pageVariants } from '../../services/pageTransition'
 import {
   BodyPage,
   BgPerfil,
@@ -26,8 +27,11 @@ import calendar from "../../images/calendar.svg";
 import clock from "../../images/clock.svg";
 import { animateScroll as scroll } from "react-scroll";
 import ModalNewUser from "../../components/ModalNewUser";
+import { motion } from 'framer-motion'
 
 const BarberPerfilPage = () => {
+  const init = pageVariants.in
+  const out = pageVariants.out
   const { schedule } = useSchedule();
   const { user, getUser, isNew } = useUser();
   const [render, setRender] = useState(false);
@@ -39,70 +43,79 @@ const BarberPerfilPage = () => {
   }, []);
 
   return (
-    <BodyPage>
-      {render && <ModalNewUser />}
-      {!isNew && scroll.scrollTo(0)}
-      <Menu menuLink={menuLinkPerfilBarber} />
-      {!isNew && (
-        <>
-          <BgPerfil />
-          <ImgPerfil src={perfil} />
-          <Nome>{user && user.name}</Nome>
-          <TextoDescritivo>{user && user.description}</TextoDescritivo>
-          <TransitionsModal />
-          <IconePequeno src={calendar} />
-          <TextoDescritivo>Seus clientes agendados</TextoDescritivo>
-          {schedule.filter((e) => e.barberId === Number(userId)).length > 0 ? (
-            <Container>
-              <Carousel
-                additionalTransfrom={0}
-                arrows={false}
-                autoPlay
-                autoPlaySpeed={3000}
-                centerMode={false}
-                className="carousel"
-                containerClass="container"
-                dotListClass=""
-                draggable
-                responsive={responsive}
-                focusOnSelect={false}
-                infinite
-                itemClass=""
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={false}
-                renderDotsOutside={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable
-              >
-                {schedule
-                  .filter((e) => e.barberId === Number(userId))
-                  .map(({ userId, dateTime, id }, index) => (
-                    <CardClient
-                      key={index}
-                      userId={userId}
-                      dateTime={dateTime}
-                      id={id}
-                    />
-                  ))}
-              </Carousel>
-            </Container>
-          ) : (
-            <TextoDescritivo erro>
-              Você ainda não possui nenhum cliente agendado
-            </TextoDescritivo>
-          )}
-        </>
-      )}
-      <IconePequeno src={clock} />
-      <TextoDescritivo>
-        {isNew ? `Complete seu cadastro` : `Atualizar Dados`}
-      </TextoDescritivo>
-      <FormProfileBarberShop setRender={setRender} />
-      <Footer />
-      <Notification />
-    </BodyPage>
+    <motion.div
+      key="barberFilterPage"
+      initial={out}
+      animate={init}
+      exit={out}
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+      <BodyPage>
+        {render && <ModalNewUser />}
+        {!isNew && scroll.scrollTo(0)}
+        <Menu menuLink={menuLinkPerfilBarber} />
+        {!isNew && (
+          <>
+            <BgPerfil />
+            <ImgPerfil src={perfil} />
+            <Nome>{user && user.name}</Nome>
+            <TextoDescritivo>{user && user.description}</TextoDescritivo>
+            <TransitionsModal />
+            <IconePequeno src={calendar} />
+            <TextoDescritivo>Seus clientes agendados</TextoDescritivo>
+            {schedule.filter((e) => e.barberId === Number(userId)).length > 0 ? (
+              <Container>
+                <Carousel
+                  additionalTransfrom={0}
+                  arrows={false}
+                  autoPlay
+                  autoPlaySpeed={3000}
+                  centerMode={false}
+                  className="carousel"
+                  containerClass="container"
+                  dotListClass=""
+                  draggable
+                  responsive={responsive}
+                  focusOnSelect={false}
+                  infinite
+                  itemClass=""
+                  keyBoardControl
+                  minimumTouchDrag={80}
+                  renderButtonGroupOutside={false}
+                  renderDotsOutside={false}
+                  sliderClass=""
+                  slidesToSlide={1}
+                  swipeable
+                >
+                  {schedule
+                    .filter((e) => e.barberId === Number(userId))
+                    .map(({ userId, dateTime, id }, index) => (
+                      <CardClient
+                        key={index}
+                        userId={userId}
+                        dateTime={dateTime}
+                        id={id}
+                      />
+                    ))}
+                </Carousel>
+              </Container>
+            ) : (
+              <TextoDescritivo erro>
+                Você ainda não possui nenhum cliente agendado
+              </TextoDescritivo>
+            )}
+          </>
+        )}
+        <IconePequeno src={clock} />
+        <TextoDescritivo>
+          {isNew ? `Complete seu cadastro` : `Atualizar Dados`}
+        </TextoDescritivo>
+        <FormProfileBarberShop setRender={setRender} />
+        <Footer />
+        <Notification />
+      </BodyPage>
+    </motion.div>
   );
 };
 

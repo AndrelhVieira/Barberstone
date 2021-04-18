@@ -1,4 +1,4 @@
-import { Container, Card } from "./styles";
+import { Container, Card, Motion } from "./styles";
 import Title from "../Title";
 import CustomerImage from "../../images/customer.jpg";
 import BarberImage from "../../images/barber.jpg";
@@ -16,16 +16,26 @@ const RegisterSectionHomepage = () => {
       <Container id="cadastrar">
         <Title>Cadastre-se</Title>
         <div>
-          <Card
+          <Motion
+            whileHover={{
+              scale:1.05, 
+              y:-5,
+              boxShadow:'0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 15px rgb(255, 255, 255), 0 0 20px rgb(187, 140, 75), 0 0 30px rgb(187, 140, 75), 0 0 40px rgb(187, 140, 75), 0 0 55px rgb(187, 140, 75), 0 0 75px rgb(187, 140, 75)'
+            }}
             image={CustomerImage}
             onClick={() => handleClick("/cadastro-cliente")}
           >
             <p>
-              Seja um membro
+              <span>Seja um membro</span>
               <i className="fas fa-arrow-alt-circle-right"></i>
             </p>
-          </Card>
-          <Card
+          </Motion>
+          <Motion
+            whileHover={{
+              scale:1.05, 
+              y:-5,
+              boxShadow:'0px 0px 10px 5px rgba(255,255,255,0.4), 0 0 40px rgb(187, 140, 75)'
+            }}
             image={BarberImage}
             onClick={() => handleClick("/cadastro-barbearia")}
           >
@@ -33,7 +43,7 @@ const RegisterSectionHomepage = () => {
               Cadastre sua barbearia
               <i className="fas fa-arrow-alt-circle-right"></i>
             </p>
-          </Card>
+          </Motion>
         </div>
         <h4>
           Já possui uma conta? Então basta{" "}

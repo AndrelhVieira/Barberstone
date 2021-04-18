@@ -1,5 +1,6 @@
 import { Redirect, Route as ReactDOMRoute } from "react-router-dom";
 import NotFound from "../pages/NotFoundPage";
+import { motion } from 'framer-motion'
 
 const Route = ({
   islogin,
@@ -18,17 +19,17 @@ const Route = ({
       {...rest}
       render={() => {
         return isprivate === undefined && !!islogin === !!isprivate ? (
-          <Component />
+            <Component />
         ) : !!isprivate !== !!token || !!islogin === !!token ? (
           <Redirect to={{ pathname: "/" }} />
         ) : !!islogin === !!token ? (
           <Redirect to={{ pathname: "/" }} />
         ) : isbarber === undefined && isclient === undefined ? (
-          <Component />
+            <Component />
         ) : !!isbarber === isBarber ? (
-          <Component />
+            <Component />
         ) : !!isclient === !isBarber ? (
-          <Component />
+            <Component />
         ) : (
           <NotFound />
         );
