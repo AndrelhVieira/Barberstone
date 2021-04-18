@@ -39,57 +39,56 @@ const Barbershop = () => {
   }, []);
 
   return (
-    <motion.div
-      key="/barbearias"
-      initial={out}
-      animate={init}
-      exit={out}
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-
-      <Container>
-        <Menu menuLink={menuLinkPerfil} />
-        <Cover />
-        <h1>melhores barbearias para você</h1>
-        <SectionCard>
-          <Carousel
-            additionalTransfrom={0}
-            arrows={false}
-            autoPlay
-            autoPlaySpeed={3000}
-            centerMode={false}
-            className=""
-            containerClass="container"
-            dotListClass=""
-            draggable
-            responsive={responsive}
-            focusOnSelect={false}
-            infinite
-            itemClass=""
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-          >
-            {!!barberUsers &&
-              barberUsers.map((e, index) => (
-                <CardBarber
-                  key={index}
-                  name={e.name}
-                  rating={e.rating}
-                  scissors={e.scissors}
-                  id={e.id}
-                />
-              ))}
-          </Carousel>
-        </SectionCard>
-        <Footer />
-      </Container>
-    </motion.div>
+  <motion.div
+    key="/barbearias"
+    initial={out}
+    animate={init}
+    exit={out}
+    variants={pageVariants}
+    transition={pageTransition}
+  >
+    <Container>
+      <Menu menuLink={menuLinkPerfil} />
+      <Cover />
+      <h1>melhores barbearias para você</h1>
+      <SectionCard>
+        <Carousel
+          additionalTransfrom={0}
+          arrows
+          autoPlay
+          autoPlaySpeed={3000}
+          centerMode={false}
+          className=""
+          containerClass="container"
+          dotListClass=""
+          draggable
+          responsive={responsive}
+          focusOnSelect={false}
+          infinite
+          itemClass=""
+          keyBoardControl
+          minimumTouchDrag={80}
+          renderButtonGroupOutside={false}
+          renderDotsOutside={false}
+          sliderClass=""
+          slidesToSlide={1}
+          swipeable
+        >
+          {!!barberUsers &&
+            barberUsers.map((e, index) => (
+              <CardBarber
+                key={index}
+                name={e.name}
+                rating={e.rating}
+                scissors={e.scissors}
+                id={e.id}
+              />
+            ))}
+        </Carousel>
+      </SectionCard>
+      <Footer />
+    </Container>
+  </motion.div>
   );
 };
 

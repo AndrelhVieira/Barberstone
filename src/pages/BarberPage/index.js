@@ -78,71 +78,69 @@ const BarberPage = () => {
 
   console.log(barberUser.state.id);
   return (
-    <motion.div
-      key='BarberPage'
-      initial={out}
-      animate={init}
-      exit={out}
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-      <BodyPage>
-        <Menu menuLink={menuLinkPerfil} />
-        <BgPerfil />
-        <ImgPerfil src={perfil} />
-        <Nome>{barberUser.state.name}</Nome>
-        <TextoDescritivo style={{ fontSize: "32px" }}>
-          {barberUser.state.description}
+  
+  <motion.div
+    key='BarberPage'
+    initial={out}
+    animate={init}
+    exit={out}
+    variants={pageVariants}
+    transition={pageTransition}
+  >
+    <BodyPage>
+      <Menu menuLink={menuLinkPerfil} />
+      <BgPerfil />
+      <ImgPerfil src={perfil} />
+      <Nome>{barberUser.state.name}</Nome>
+      <TextoDescritivo style={{ fontSize: "32px" }}>
+        {barberUser.state.description}
+      </TextoDescritivo>
+      <TextoDescritivo style={{}}>{barberUser.state.address}</TextoDescritivo>
+      {!isBarber && <TransitionsModal barberId={barberUser.state.id} />}
+      <Icon src={IcoAgenda} alt="" />
+      <TextoDescritivo style={{}}>clientes agendados</TextoDescritivo>
+      {schedule.filter((e) => e.barberId === barberUser.state.id).length > 0 ? (
+        <Container>
+          <Carousel
+            additionalTransfrom={0}
+            arrows
+            autoPlay
+            autoPlaySpeed={3000}
+            centerMode={false}
+            className="carousel"
+            containerClass="container"
+            dotListClass=""
+            draggable
+            responsive={responsive}
+            focusOnSelect={false}
+            infinite
+            itemClass=""
+            keyBoardControl
+            minimumTouchDrag={80}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false}
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+          >
+            {schedule
+              .filter((e) => e.barberId === barberUser.state.id)
+              .map(({ userId, dateTime }, index) => (
+                <CardClient
+                  key={index}
+                  userId={userId}
+                  dateTime={dateTime}
+                  isDetails={true}
+                  isClient
+                />
+              ))}
+          </Carousel>
+        </Container>
+      ) : (
+        <TextoDescritivo erro>
+          Em breve haverá clientes aqui! ;)
         </TextoDescritivo>
-        <TextoDescritivo style={{}}>{barberUser.state.address}</TextoDescritivo>
-        {!isBarber && <TransitionsModal barberId={barberUser.state.id} />}
-        <Icon src={IcoAgenda} alt="" />
-        <TextoDescritivo style={{}}>clientes agendados</TextoDescritivo>
-        {schedule.filter((e) => e.barberId === barberUser.state.id).length > 0 ? (
-          <Container>
-            <Carousel
-              additionalTransfrom={0}
-              arrows={false}
-              autoPlay
-              autoPlaySpeed={3000}
-              centerMode={false}
-              className="carousel"
-              containerClass="container"
-              dotListClass=""
-              draggable
-              responsive={responsive}
-              focusOnSelect={false}
-              infinite
-              itemClass=""
-              keyBoardControl
-              minimumTouchDrag={80}
-              renderButtonGroupOutside={false}
-              renderDotsOutside={false}
-              sliderClass=""
-              slidesToSlide={1}
-              swipeable
-            >
-              {schedule
-                .filter((e) => e.barberId === barberUser.state.id)
-                .map(({ userId, dateTime }, index) => (
-                  <CardClient
-                    key={index}
-                    userId={userId}
-                    dateTime={dateTime}
-                    isDetails={true}
-                    isClient
-                  />
-                ))}
-            </Carousel>
-          </Container>
-        ) : (
-          <TextoDescritivo erro>
-            Em breve haverá clientes aqui! ;)
-          </TextoDescritivo>
-        )}
-        <TextoDescritivo style={{ marginTop: "60px" }}>
-          opções de lazer disponíveis
-        </TextoDescritivo>
+      )}
         <BoxLazer>
           {leisure.map((lazer, index) => (
             <Atracao key={index}>

@@ -3,12 +3,17 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { ModalStyled, FadeStyled, Img } from "./styles";
 import Logo from "../../images/LogoModal.svg";
 import Fechar from "../../images/fechar.svg";
+import { animateScroll as scroll } from "react-scroll";
 
 export default function ModalNewUser() {
   const [open, setOpen] = useState(true);
   const isBarber = JSON.parse(localStorage.getItem("isBarber"));
   const handleClose = () => {
     setOpen(false);
+
+    setTimeout(() => {
+      scroll.scrollTo(0);
+    }, 1000);
   };
 
   return (
@@ -27,7 +32,7 @@ export default function ModalNewUser() {
         <FadeStyled in={open}>
           <div>
             <Img src={Fechar} alt="close" onClick={handleClose} />
-            <h2>Seja muito bem vindo ao barberstone!!!</h2>
+            <h2>Seja muito bem-vindo ao barberstone!!!</h2>
             {!isBarber ? (
               <p>
                 Aqui você encontra as melhores barbearias da sua região, agenda
