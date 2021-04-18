@@ -8,7 +8,7 @@ export const ContainerForm = styled(GlobalnWrapStyled)`
     margin: 0;
     right: 0;
     border-radius: 0;
-    width: 50vw;
+    width: 50%;
     height: 100vh;
     overflow-y: scroll;
     background-color: rgba(27, 40, 69, 0.9);
@@ -33,7 +33,7 @@ export const ContainerRegister = styled(GlobalnWrapStyled)`
       display: block;
       position: absolute;
       background-color: rgba(0, 0, 0, 0.75);
-      height: 130vh;
+      height: 100vh;
       width: 100%;
       padding-bottom: 0px;
     }

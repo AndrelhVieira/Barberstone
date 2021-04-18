@@ -62,19 +62,25 @@ const FormLogin = () => {
         if(response.data.phone === undefined) {
           setIsNew(true)
         }
+        if(!response.data.isBarber) {
+          localStorage.setItem(
+            "isClient",
+            JSON.stringify(true)
+          );
+        }
         localStorage.setItem(
           "isBarber",
           JSON.stringify(response.data.isBarber) || false
         );
-          goToProfile(response.data.isBarber, userId);
+          goToProfile(response.data.isBarber);
       });
   };
 
   const goToProfile = (isBarber) => {
-    if (isBarber) {
-      history.push("/perfil-barbearia");
+    if (!!isBarber) {
+        history.push("/perfil-barbearia");
     } else {
-      history.push("/perfil-cliente");
+        history.push("/perfil-cliente");
     }
   };
 

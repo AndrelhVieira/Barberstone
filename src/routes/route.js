@@ -10,30 +10,22 @@ const Route = ({
   component: Component,
   ...rest
 }) => {
-  const token = JSON.parse(localStorage.getItem("token"));
 
   const isBarber = JSON.parse(localStorage.getItem("isBarber"));
+  const isClient = JSON.parse(localStorage.getItem("isClient"));
 
-  
+
   return (
     <ReactDOMRoute
       {...rest}
       render={() => {
-        return isprivate === undefined && !!islogin === !!isprivate ? (
+        return isprivate === undefined ? (
             <Component />
-        ) : !!isprivate !== !!token || !!islogin === !!token ? (
+        ) : isclient !== isClient && isbarber !== isBarber ? (
           <Redirect to={{ pathname: "/" }} />
-        ) : !!islogin === !!token ? (
-          <Redirect to={{ pathname: "/" }} />
-        ) : isbarber === undefined && isclient === undefined ? (
-            <Component />
-        ) : !!isbarber === isBarber ? (
-            <Component />
-        ) : !!isclient === !isBarber ? (
-            <Component />
         ) : (
-          <NotFound />
-        );
+          <Component />
+        )
       }}
     />
   );
